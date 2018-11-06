@@ -69,8 +69,12 @@ type SubscriptionNotification struct {
 	ExpirationIntent string `json:"expiration_intent"`
 
 	// Auto renew info
-	AutoRenewStatus    string `json:"auto_renew_status"` // false or true
+	AutoRenewStatus    int    `json:"auto_renew_status"` // false or true
 	AutoRenewProductID string `json:"auto_renew_product_id"`
+
+	// HACK (msyrus): Separate Subscriptiton Notification from Notification verification response
+	Status  int                 `json:"status"`
+	Receipt NotificationReceipt `json:"recipt"`
 
 	// Posted if the notification_type is RENEWAL or INTERACTIVE_RENEWAL, and only if the renewal is successful.
 	// Posted also if the notification_type is INITIAL_BUY.
