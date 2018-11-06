@@ -75,8 +75,9 @@ type SubscriptionNotification struct {
 	AutoRenewProductID string `json:"auto_renew_product_id"`
 
 	// HACK (msyrus): Separate Subscriptiton Notification from Notification verification response
-	Status  int                 `json:"status"`
-	Receipt NotificationReceipt `json:"recipt"`
+	Status                int                 `json:"status"`
+	Receipt               NotificationReceipt `json:"recipt"`
+	SubscriptionRetryFlag string              `json:"is_in_billing_retry_period"`
 
 	// Posted if the notification_type is RENEWAL or INTERACTIVE_RENEWAL, and only if the renewal is successful.
 	// Posted also if the notification_type is INITIAL_BUY.
