@@ -79,7 +79,6 @@ type SubscriptionNotification struct {
 	Receipt               NotificationReceipt `json:"recipt"`
 	SubscriptionRetryFlag string              `json:"is_in_billing_retry_period"`
 
-
 	// Posted if the notification_type is RENEWAL or INTERACTIVE_RENEWAL, and only if the renewal is successful.
 	// Posted also if the notification_type is INITIAL_BUY.
 	// Not posted for notification_type CANCEL.
