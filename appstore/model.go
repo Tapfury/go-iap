@@ -93,6 +93,7 @@ type (
 
 		CancellationDate
 		CancellationReason string `json:"cancellation_reason,omitempty"`
+		IsUpgraded         string `json:"is_upgraded,omitempty"`
 	}
 
 	// The Receipt type has whole data of receipt
