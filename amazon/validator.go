@@ -31,8 +31,14 @@ type IAPResponse struct {
 	ProductType     string `json:"productType"`
 	ProductID       string `json:"productId"`
 	PurchaseDate    int64  `json:"purchaseDate"`
+	RenewalDate     int64  `json:"renewalDate"`
 	CancelDate      int64  `json:"cancelDate"`
 	TestTransaction bool   `json:"testTransaction"`
+	BetaProduct     bool   `json:"betaProduct"`
+	ParentProductID string `json:"parentProductId"`
+	Quantity        int64  `json:"quantity"`
+	Term            string `json:"term"`
+	TermSku         string `json:"termSku"`
 }
 
 // The IAPResponseError typs has error message and status.
@@ -95,13 +101,16 @@ func (c *Client) Verify(ctx context.Context, userID string, receiptID string) (I
 
 	resp, err := c.httpCli.Do(req)
 	if err != nil {
-		return result, fmt.Errorf("%v", err)
+		return result, err
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
 		responseError := IAPResponseError{}
 		err = json.NewDecoder(resp.Body).Decode(&responseError)
+		if err != nil {
+			return result, err
+		}
 		return result, errors.New(responseError.Message)
 	}
 

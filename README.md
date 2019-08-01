@@ -1,7 +1,7 @@
 go-iap
 ======
 
-![](https://img.shields.io/badge/golang-1.11-blue.svg?style=flat)
+![](https://img.shields.io/badge/golang-1.12-blue.svg?style=flat)
 [![Build Status](https://travis-ci.org/awa/go-iap.svg?branch=master)](https://travis-ci.org/awa/go-iap)
 [![codecov.io](https://codecov.io/github/awa/go-iap/coverage.svg?branch=master)](https://codecov.io/github/awa/go-iap?branch=master)
 
@@ -13,13 +13,6 @@ Current API Documents:
 * GooglePlay: [![GoDoc](https://godoc.org/github.com/awa/go-iap/playstore?status.svg)](https://godoc.org/github.com/awa/go-iap/playstore)
 * Amazon AppStore: [![GoDoc](https://godoc.org/github.com/awa/go-iap/amazon?status.svg)](https://godoc.org/github.com/awa/go-iap/amazon)
 
-
-# Dependencies
-```
-go get golang.org/x/oauth2
-go get golang.org/x/oauth2/google
-go get google.golang.org/api/androidpublisher/v2
-```
 
 # Installation
 ```
