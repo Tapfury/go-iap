@@ -138,6 +138,16 @@ type (
 		IsRetryable        bool                 `json:"is-retryable,omitempty"`
 	}
 
+	// The IAPLatestResponse type has the response properties
+	// If you use latest_receipt as token to verify, response should be like following struct
+	IAPLatestResponse struct {
+		Status                   int    `json:"status"`
+		Receipt                  InApp  `json:"receipt"`
+		LatestReceiptInfo        InApp  `json:"latest_receipt_info,omitempty"`
+		LatestExpiredReceiptInfo InApp  `json:"latest_expired_receipt_info,omitempty"`
+		LatestReceipt            string `json:"latest_receipt,omitempty"`
+	}
+
 	// The HttpStatusResponse struct contains the status code returned by the store
 	// Used as a workaround to detect when to hit the production appstore or sandbox appstore regardless of receipt type
 	StatusResponse struct {

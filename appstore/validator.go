@@ -96,64 +96,64 @@ func NewWithClient(client *http.Client) *Client {
 }
 
 // Verify sends receipts and gets validation result
-func (c *Client) Verify(ctx context.Context, reqBody IAPRequest, result interface{}) error {
+func (c *Client) Verify(ctx context.Context, reqBody IAPRequest, result interface{}) (Environment, error) {
 	b := new(bytes.Buffer)
 	if err := json.NewEncoder(b).Encode(reqBody); err != nil {
-		return err
+		return "", err
 	}
 
 	req, err := http.NewRequest("POST", c.ProductionURL, b)
 	if err != nil {
-		return err
+		return "", err
 	}
 	req.Header.Set("Content-Type", ContentType)
 	req = req.WithContext(ctx)
 	resp, err := c.httpCli.Do(req)
 	if err != nil {
-		return err
+		return "", err
 	}
 	defer resp.Body.Close()
 	return c.parseResponse(resp, result, ctx, reqBody)
 }
 
-func (c *Client) parseResponse(resp *http.Response, result interface{}, ctx context.Context, reqBody IAPRequest) error {
+func (c *Client) parseResponse(resp *http.Response, result interface{}, ctx context.Context, reqBody IAPRequest) (Environment, error) {
 	// Read the body now so that we can unmarshal it twice
 	buf, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	err = json.Unmarshal(buf, &result)
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	// https://developer.apple.com/library/content/technotes/tn2413/_index.html#//apple_ref/doc/uid/DTS40016228-CH1-RECEIPTURL
 	var r StatusResponse
 	err = json.Unmarshal(buf, &r)
 	if err != nil {
-		return err
+		return "", err
 	}
 	if r.Status == 21007 {
 		b := new(bytes.Buffer)
 		if err := json.NewEncoder(b).Encode(reqBody); err != nil {
-			return err
+			return "", err
 		}
 
 		req, err := http.NewRequest("POST", c.SandboxURL, b)
 		if err != nil {
-			return err
+			return "", err
 		}
 		req.Header.Set("Content-Type", ContentType)
 		req = req.WithContext(ctx)
 		resp, err := c.httpCli.Do(req)
 		if err != nil {
-			return err
+			return "", err
 		}
 		defer resp.Body.Close()
-
-		return json.NewDecoder(resp.Body).Decode(result)
+		// 21007 is found when the receipt is from the test environment
+		return Sandbox, json.NewDecoder(resp.Body).Decode(result)
 	}
 
-	return nil
+	return Production, nil
 }
