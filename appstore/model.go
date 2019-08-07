@@ -141,11 +141,14 @@ type (
 	// The IAPLatestResponse type has the response properties
 	// If you use latest_receipt as token to verify, response should be like following struct
 	IAPLatestResponse struct {
-		Status                   int    `json:"status"`
-		Receipt                  InApp  `json:"receipt"`
-		LatestReceiptInfo        InApp  `json:"latest_receipt_info,omitempty"`
-		LatestExpiredReceiptInfo InApp  `json:"latest_expired_receipt_info,omitempty"`
-		LatestReceipt            string `json:"latest_receipt,omitempty"`
+		Status                         int    `json:"status"`
+		Receipt                        InApp  `json:"receipt"`
+		LatestReceiptInfo              InApp  `json:"latest_receipt_info,omitempty"`
+		LatestExpiredReceiptInfo       InApp  `json:"latest_expired_receipt_info,omitempty"`
+		LatestReceipt                  string `json:"latest_receipt,omitempty"`
+		SubscriptionAutoRenewStatus    string `json:"auto_renew_status,omitempty"`
+		SubscriptionAutoRenewProductID string `json:"auto_renew_product_id,omitempty"`
+		SubscriptionRetryFlag          string `json:"is_in_billing_retry_period,omitempty"`
 	}
 
 	// The HttpStatusResponse struct contains the status code returned by the store
