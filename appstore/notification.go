@@ -71,7 +71,7 @@ type SubscriptionNotification struct {
 	ExpirationIntent string `json:"expiration_intent"`
 
 	// Auto renew info
-	AutoRenewStatus    int    `json:"auto_renew_status"` // false or true
+	AutoRenewStatus    string    `json:"auto_renew_status"` // false or true
 	AutoRenewProductID string `json:"auto_renew_product_id"`
 
 	// HACK (msyrus): Separate Subscriptiton Notification from Notification verification response
