@@ -75,7 +75,7 @@ type SubscriptionNotification struct {
 	AutoRenewProductID string `json:"auto_renew_product_id"`
 
 	// HACK (msyrus): Separate Subscriptiton Notification from Notification verification response
-	Status                int                 `json:"status"`
+	Status                int                 `json:"status,omitempty"`
 	Receipt               NotificationReceipt `json:"recipt"`
 	SubscriptionRetryFlag string              `json:"is_in_billing_retry_period"`
 
