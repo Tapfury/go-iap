@@ -137,11 +137,10 @@ type (
 		PendingRenewalInfo []PendingRenewalInfo `json:"pending_renewal_info,omitempty"`
 		IsRetryable        bool                 `json:"is-retryable,omitempty"`
 	}
-
 	// The IAPLatestResponse type has the response properties
 	// If you use latest_receipt as token to verify, response should be like following struct
 	IAPLatestResponse struct {
-		Status                         int    `json:"status"`
+		Status                         int    `json:"status,omitempty"`
 		Receipt                        InApp  `json:"receipt"`
 		LatestReceiptInfo              InApp  `json:"latest_receipt_info,omitempty"`
 		LatestExpiredReceiptInfo       InApp  `json:"latest_expired_receipt_info,omitempty"`
