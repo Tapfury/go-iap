@@ -76,16 +76,27 @@ type (
 		CancellationDatePST string `json:"cancellation_date_pst,omitempty"`
 	}
 
+	// The GracePeriodDate type indicates the grace period date for the subscription
+	GracePeriodDate struct {
+		GracePeriodDate    string `json:"grace_period_expires_date,omitempty"`
+		GracePeriodDateMS  string `json:"grace_period_expires_date_ms,omitempty"`
+		GracePeriodDatePST string `json:"grace_period_expires_date_pst,omitempty"`
+	}
+
 	// The InApp type has the receipt attributes
 	InApp struct {
-		Quantity              string `json:"quantity"`
-		ProductID             string `json:"product_id"`
-		TransactionID         string `json:"transaction_id"`
-		OriginalTransactionID string `json:"original_transaction_id"`
-		WebOrderLineItemID    string `json:"web_order_line_item_id,omitempty"`
+		Quantity                    string `json:"quantity"`
+		ProductID                   string `json:"product_id"`
+		TransactionID               string `json:"transaction_id"`
+		OriginalTransactionID       string `json:"original_transaction_id"`
+		WebOrderLineItemID          string `json:"web_order_line_item_id,omitempty"`
+		PromotionalOfferID          string `json:"promotional_offer_id"`
+		SubscriptionGroupIdentifier string `json:"subscription_group_identifier"`
 
 		IsTrialPeriod        string `json:"is_trial_period"`
 		IsInIntroOfferPeriod string `json:"is_in_intro_offer_period,omitempty"`
+		IsUpgraded           string `json:"is_upgraded"`
+
 		ExpiresDate
 
 		PurchaseDate
@@ -121,6 +132,8 @@ type (
 		SubscriptionPriceConsentStatus string `json:"price_consent_status"`
 		ProductID                      string `json:"product_id"`
 		OriginalTransactionID          string `json:"original_transaction_id"`
+
+		GracePeriodDate
 	}
 
 	// The IAPResponse type has the response properties
